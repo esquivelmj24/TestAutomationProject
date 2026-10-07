@@ -5,12 +5,14 @@ export class LoginPage {
     readonly inputUsername: Locator;
     readonly inputPassword: Locator;
     readonly loginButton: Locator;
+    readonly errorLogin: Locator;
 
     constructor(page:Page) {
         this.page = page
         this.inputUsername = page.getByPlaceholder("Username");
         this.inputPassword = page.getByRole('textbox', {name: 'Password'});
         this.loginButton = page.locator('[id="login-button"]');
+        this.errorLogin = page.getByText('Epic sadface: Username and password do not match any user in this service')
     }
 
     async LoginFunctionality(username: string, password: string) {
@@ -19,6 +21,11 @@ export class LoginPage {
         await this.inputPassword.fill(password);
         await this.loginButton.click();
     }
-}
 
-//test 1
+
+    async errorHandlingLogin() {
+        await expect(this.errorLogin).toBeVisible();
+    }
+
+}
+    
