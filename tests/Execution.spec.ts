@@ -12,6 +12,11 @@ test('Login using valid username and password', async ({page}) => {
 
 //Test Cases no. 2
 // Login using invalid username and Password
+test('Enter invalid username and password', async({page}) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.LoginFunctionality('test','test');
+    await loginPage.errorHandlingLogin()
+})
 
 
 
